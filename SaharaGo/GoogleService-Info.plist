@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1017154606330-bksm3c8fk3nkepcm5ds0fndhopopac3v.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1017154606330-bksm3c8fk3nkepcm5ds0fndhopopac3v</string>
+	<key>API_KEY</key>
+	<string>AIzaSyArN2llXYEoP_xASQcxTrM1Q3s9YTRDoFM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1017154606330</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.SaharaGo</string>
+	<key>PROJECT_ID</key>
+	<string>saharago-36496</string>
+	<key>STORAGE_BUCKET</key>
+	<string>saharago-36496.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1017154606330:ios:347d265aa052b1886b2543</string>
+</dict>
+</plist>
