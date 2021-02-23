@@ -6,6 +6,7 @@ ${PODS_ROOT}/Braintree/Frameworks/CardinalMobile.framework
 ${BUILT_PRODUCTS_DIR}/BraintreeDropIn/BraintreeDropIn.framework
 ${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework
 ${BUILT_PRODUCTS_DIR}/CountryPickerView/CountryPickerView.framework
+${BUILT_PRODUCTS_DIR}/CropViewController/CropViewController.framework
 ${BUILT_PRODUCTS_DIR}/DLRadioButton/DLRadioButton.framework
 ${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework
 ${BUILT_PRODUCTS_DIR}/Floaty/Floaty.framework

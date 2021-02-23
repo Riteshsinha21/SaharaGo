@@ -1182,6 +1182,20 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VqT-iY-gF4">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
                                                 <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rnJ-Ih-Mxc">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
+                                                    </imageView>
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nBo-4a-Zuk">
+                                                        <rect key="frame" x="335" y="100" width="35" height="35"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="35" id="7Qf-9L-OFS"/>
+                                                            <constraint firstAttribute="height" constant="35" id="Ob8-Q3-yLd"/>
+                                                        </constraints>
+                                                        <state key="normal" image="camera-1"/>
+                                                        <connections>
+                                                            <action selector="coverCameraAction:" destination="ajI-Zw-QDG" eventType="touchUpInside" id="q2q-Pf-ME6"/>
+                                                        </connections>
+                                                    </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wzG-4E-epI">
                                                         <rect key="frame" x="160" y="15" width="55" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
@@ -1200,13 +1214,18 @@
                                                         </connections>
                                                     </button>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.58246117829999999" green="0.88257831340000004" blue="0.98312264680000006" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
+                                                    <constraint firstItem="rnJ-Ih-Mxc" firstAttribute="top" secondItem="VqT-iY-gF4" secondAttribute="top" id="0MQ-lm-DhQ"/>
+                                                    <constraint firstItem="nBo-4a-Zuk" firstAttribute="trailing" secondItem="rnJ-Ih-Mxc" secondAttribute="trailing" constant="-5" id="Fus-2T-Ovk"/>
+                                                    <constraint firstAttribute="bottom" secondItem="rnJ-Ih-Mxc" secondAttribute="bottom" id="HNm-ja-nEv"/>
                                                     <constraint firstItem="wzG-4E-epI" firstAttribute="centerX" secondItem="VqT-iY-gF4" secondAttribute="centerX" id="IWj-Ck-sOl"/>
                                                     <constraint firstItem="wzG-4E-epI" firstAttribute="top" secondItem="VqT-iY-gF4" secondAttribute="top" constant="15" id="M3D-Dt-e7k"/>
                                                     <constraint firstItem="pVL-vV-ECK" firstAttribute="centerY" secondItem="wzG-4E-epI" secondAttribute="centerY" id="Rmx-Ec-lox"/>
                                                     <constraint firstAttribute="height" constant="120" id="YWd-tT-Nr1"/>
                                                     <constraint firstItem="pVL-vV-ECK" firstAttribute="top" secondItem="VqT-iY-gF4" secondAttribute="top" constant="10" id="fcb-0s-TVD"/>
+                                                    <constraint firstItem="rnJ-Ih-Mxc" firstAttribute="leading" secondItem="VqT-iY-gF4" secondAttribute="leading" id="u5o-gf-q3f"/>
+                                                    <constraint firstItem="nBo-4a-Zuk" firstAttribute="bottom" secondItem="rnJ-Ih-Mxc" secondAttribute="bottom" constant="15" id="vds-oY-tPA"/>
+                                                    <constraint firstAttribute="trailing" secondItem="rnJ-Ih-Mxc" secondAttribute="trailing" id="vxB-n9-Xq0"/>
                                                     <constraint firstItem="pVL-vV-ECK" firstAttribute="leading" secondItem="VqT-iY-gF4" secondAttribute="leading" constant="15" id="wSY-Wj-5Tn"/>
                                                 </constraints>
                                             </view>
@@ -1445,6 +1464,7 @@
                         <outlet property="backBtn" destination="pVL-vV-ECK" id="hMQ-XT-g89"/>
                         <outlet property="cityTxt" destination="Vog-O6-Uz1" id="KXa-mn-pK1"/>
                         <outlet property="countryTxt" destination="7Fm-Bl-jDH" id="Qlr-Po-eQX"/>
+                        <outlet property="coverCameraBtn" destination="nBo-4a-Zuk" id="fue-WV-Ot8"/>
                         <outlet property="editBtn" destination="Urr-Ev-h2t" id="HaI-j8-mNg"/>
                         <outlet property="emailMobileTxt" destination="vgi-Wr-6xN" id="gUn-6l-SLS"/>
                         <outlet property="firstNameTxt" destination="R3y-es-6iY" id="JQD-9H-J1h"/>
@@ -1454,13 +1474,14 @@
                         <outlet property="stateTxt" destination="IVb-3z-Ggp" id="Sed-jU-LMa"/>
                         <outlet property="streetAddressTxt" destination="EwP-R5-3vi" id="foX-ZR-c4J"/>
                         <outlet property="updatebtn" destination="4dX-RB-hpK" id="Jxo-Hd-dWR"/>
+                        <outlet property="userCoverImg" destination="rnJ-Ih-Mxc" id="FFM-gZ-yQ6"/>
                         <outlet property="userProfileImg" destination="e3n-QW-Ty4" id="uPy-aD-PvY"/>
                         <outlet property="zipcodeTxt" destination="rXJ-Gr-mNQ" id="EOn-HB-wMh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eeP-av-9PP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3853.5999999999999" y="741.67916041979015"/>
+            <point key="canvasLocation" x="3853.5999999999999" y="741.22938530734643"/>
         </scene>
         <!--Sellermanage CategoriesVC-->
         <scene sceneID="Zb8-zn-m3p">
@@ -4705,6 +4726,7 @@
         <image name="Vector Smart Object" width="229" height="201.5"/>
         <image name="add-1" width="38" height="38"/>
         <image name="backpage" width="44" height="43.5"/>
+        <image name="camera-1" width="42" height="42"/>
         <image name="cover" width="414" height="119.5"/>
         <image name="cross_dark" width="14" height="14.5"/>
         <image name="edit cat_img" width="400" height="400"/>

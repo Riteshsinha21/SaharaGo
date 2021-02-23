@@ -33,6 +33,7 @@ target 'SaharaGo' do
   pod 'Firebase/Messaging'
   pod 'YangMingShan'
   pod 'Floaty', '~> 4.2.0'
+  pod 'CropViewController'
   
   # Add the Firebase pod for Google Analytics
   
