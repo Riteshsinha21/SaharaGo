@@ -81,7 +81,10 @@ class SellerAddProductsVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.resignFirstResponder()
+        DispatchQueue.main.async {
+            textField.resignFirstResponder()
+        }
+        
         //call your function here
         self.openActionsheet()
     }
