@@ -73,6 +73,7 @@
 		7175F102258A7A820026527B /* ChooseCountryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7175F101258A7A820026527B /* ChooseCountryVC.swift */; };
 		7175F104258B25C80026527B /* ForgotPasswordOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7175F103258B25C80026527B /* ForgotPasswordOTPVC.swift */; };
 		7175F106258B35C00026527B /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7175F105258B35C00026527B /* WelcomeVC.swift */; };
+		71762AD525E7CAF600FEE9A1 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71762AD425E7CAF600FEE9A1 /* SuperViewController.swift */; };
 		7178AACB258CD26800C45CFC /* HomeNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178AACA258CD26800C45CFC /* HomeNewVC.swift */; };
 		7178AACD258CD5E300C45CFC /* HomeNewCollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178AACC258CD5E300C45CFC /* HomeNewCollCell.swift */; };
 		7178AACF258CD82F00C45CFC /* HomeNewBannerCollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178AACE258CD82F00C45CFC /* HomeNewBannerCollCell.swift */; };
@@ -248,6 +249,7 @@
 		7175F101258A7A820026527B /* ChooseCountryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseCountryVC.swift; sourceTree = "<group>"; };
 		7175F103258B25C80026527B /* ForgotPasswordOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordOTPVC.swift; sourceTree = "<group>"; };
 		7175F105258B35C00026527B /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
+		71762AD425E7CAF600FEE9A1 /* SuperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperViewController.swift; sourceTree = "<group>"; };
 		7178AACA258CD26800C45CFC /* HomeNewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewVC.swift; sourceTree = "<group>"; };
 		7178AACC258CD5E300C45CFC /* HomeNewCollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewCollCell.swift; sourceTree = "<group>"; };
 		7178AACE258CD82F00C45CFC /* HomeNewBannerCollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewBannerCollCell.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				45F166392577799A00B9BD5D /* API_Class */,
 				45F2841B2577738100B7B795 /* AppDelegate.swift */,
 				45F2841F2577738100B7B795 /* ViewController.swift */,
+				71762AD425E7CAF600FEE9A1 /* SuperViewController.swift */,
 				71A56626257E183600D9818E /* Controllers */,
 				45F284242577738400B7B795 /* Assets.xcassets */,
 				57376438259E04F0007AF481 /* GoogleService-Info.plist */,
@@ -1120,6 +1123,7 @@
 				71E6A69C25876F36004FF158 /* ArrayChoiceTableViewController.swift in Sources */,
 				7110A81225ADD8880015D264 /* SubCategoriesVC.swift in Sources */,
 				71A5665C2580E55F00D9818E /* SellerLoginVC.swift in Sources */,
+				71762AD525E7CAF600FEE9A1 /* SuperViewController.swift in Sources */,
 				71A5665A2580E54000D9818E /* SellerSignUpVC.swift in Sources */,
 				717D0E31258C7D5800483F64 /* SqliteManager.swift in Sources */,
 				45F166AB2577820800B9BD5D /* YBTextPickerDataModel.swift in Sources */,
