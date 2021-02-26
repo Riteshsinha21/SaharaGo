@@ -19,7 +19,7 @@ struct rating_struct {
     
 }
 
-class ProductDetailsVC: UIViewController {
+class ProductDetailsVC: SuperViewController {
     
     var database : Connection!
     let productsTable = Table("products")

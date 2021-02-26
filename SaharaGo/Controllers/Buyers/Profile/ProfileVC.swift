@@ -35,6 +35,14 @@ class ProfileVC: UIViewController {
         isProfileTab = "no"
         self.navigationController?.navigationBar.isHidden = true
         self.tabBarController?.tabBar.isHidden = false
+        
+        guard let countryColorStr = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.COUNTRY_COLOR_CODE) as? String else {return}
+        guard let rgba = countryColorStr.slice(from: "(", to: ")") else { return }
+        let myStringArr = rgba.components(separatedBy: ",")
+        self.logOutBtn.backgroundColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+        
+        
+        
         if UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) == nil {
             self.loginView.isHidden = false
         } else {

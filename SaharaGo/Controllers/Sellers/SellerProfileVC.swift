@@ -167,6 +167,20 @@ class SellerProfileVC: UIViewController, UIPickerViewDelegate, CropViewControlle
        // self.userProfileImg.contentMode = .scaleToFill
         self.userProfileImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.userImage)"), placeholderImage: UIImage(named: "pp"))
         self.userCoverImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.coverImage)"), placeholderImage: UIImage(named: "pp"))
+        
+        
+        if profileInfo.userImage.count > 0 && profileInfo.coverImage.count == 0 {
+            self.metadataDic.setValue(profileInfo.userImage, forKey: "image")
+        } else if profileInfo.userImage.count == 0 && profileInfo.coverImage.count > 0 {
+            self.metadataDic.setValue(profileInfo.coverImage, forKey: "coverImage")
+        } else if profileInfo.userImage.count == 0 && profileInfo.coverImage.count == 0 {
+            self.metadataDic.setValue("", forKey: "coverImage")
+            self.metadataDic.setValue("", forKey: "image")
+        } else {
+            self.metadataDic.setValue(profileInfo.coverImage, forKey: "coverImage")
+            self.metadataDic.setValue(profileInfo.userImage, forKey: "image")
+        }
+        
     }
     
     @IBAction func editAction(_ sender: Any) {

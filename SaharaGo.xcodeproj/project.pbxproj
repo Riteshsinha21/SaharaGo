@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0048A71A770D9A281C4855E0 /* Pods_SaharaGoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC9A60A4862C923178216C9C /* Pods_SaharaGoTests.framework */; };
 		1ABBB601604401A6B7825D32 /* Pods_SaharaGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CFDA286C8070330CA630C68 /* Pods_SaharaGo.framework */; };
+		45813E8C25E902900051A5F4 /* CustomButtonClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45813E8B25E902900051A5F4 /* CustomButtonClass.swift */; };
 		45F1664325777A1F00B9BD5D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F1664225777A1F00B9BD5D /* Constants.swift */; };
 		45F1664925777A6800B9BD5D /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F1664825777A6800B9BD5D /* Extensions.swift */; };
 		45F1665025777AAD00B9BD5D /* ValidationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F1664F25777AAD00B9BD5D /* ValidationManager.swift */; };
@@ -177,6 +178,7 @@
 		2699D44A9B5D21BCEA755174 /* Pods-SaharaGo-SaharaGoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaharaGo-SaharaGoUITests.debug.xcconfig"; path = "Target Support Files/Pods-SaharaGo-SaharaGoUITests/Pods-SaharaGo-SaharaGoUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		26FE1688353B69988D6F8EBA /* Pods_SaharaGo_SaharaGoUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SaharaGo_SaharaGoUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB950D917B8944C44BAE440 /* Pods-SaharaGo-SaharaGoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SaharaGo-SaharaGoUITests.release.xcconfig"; path = "Target Support Files/Pods-SaharaGo-SaharaGoUITests/Pods-SaharaGo-SaharaGoUITests.release.xcconfig"; sourceTree = "<group>"; };
+		45813E8B25E902900051A5F4 /* CustomButtonClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButtonClass.swift; sourceTree = "<group>"; };
 		45F1664225777A1F00B9BD5D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		45F1664825777A6800B9BD5D /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		45F1664F25777AAD00B9BD5D /* ValidationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidationManager.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 				45F2841B2577738100B7B795 /* AppDelegate.swift */,
 				45F2841F2577738100B7B795 /* ViewController.swift */,
 				71762AD425E7CAF600FEE9A1 /* SuperViewController.swift */,
+				45813E8B25E902900051A5F4 /* CustomButtonClass.swift */,
 				71A56626257E183600D9818E /* Controllers */,
 				45F284242577738400B7B795 /* Assets.xcassets */,
 				57376438259E04F0007AF481 /* GoogleService-Info.plist */,
@@ -1108,6 +1111,7 @@
 				71A56632257E488C00D9818E /* EditProfileVC.swift in Sources */,
 				71AD5608258A0EDC00BE0AD6 /* ProductDetailsVC.swift in Sources */,
 				71616EC6257A332300A87162 /* SignUpVC.swift in Sources */,
+				45813E8C25E902900051A5F4 /* CustomButtonClass.swift in Sources */,
 				71A566532580C90500D9818E /* HomeRecommendedCell.swift in Sources */,
 				71A566482580B96A00D9818E /* HomeVC.swift in Sources */,
 				71A56630257E459200D9818E /* ProfileDetailVC.swift in Sources */,

@@ -31,7 +31,7 @@ struct topDeals_Struct {
     var images: [String]?
 }
 
-class HomeNewVC: UIViewController {
+class HomeNewVC: SuperViewController {
     
     @IBOutlet var headerView: UIView!
     @IBOutlet var cartBadgeLbl: UILabel!
@@ -784,3 +784,4 @@ extension HomeNewVC: UISearchBarDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+

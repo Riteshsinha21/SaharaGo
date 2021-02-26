@@ -38,7 +38,7 @@ class WishlistVC: UIViewController {
             if cartCount == 0 {
                 self.cartBadgeLbl.isHidden = true
             } else {
-                self.cartBadgeLbl.isHidden = false
+                //self.cartBadgeLbl.isHidden = false
                 self.cartBadgeLbl.text = "\(cartCount)"
             }
             
@@ -51,7 +51,7 @@ class WishlistVC: UIViewController {
             if cartCount == 0 {
                 self.cartBadgeLbl.isHidden = true
             } else {
-                self.cartBadgeLbl.isHidden = false
+                //self.cartBadgeLbl.isHidden = false
                 let cartCountDic = notification.userInfo?["userInfo"] as? [String: Any] ?? [:]
                 self.cartBadgeLbl.text = "\(String(describing: cartCountDic["cartCount"]!))"
             }
@@ -63,8 +63,18 @@ class WishlistVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         isWishlistTab = "no"
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.topItem?.title = "Wishlist"
+        guard let countryColorStr = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.COUNTRY_COLOR_CODE) as? String else {return}
+        guard let rgba = countryColorStr.slice(from: "(", to: ")") else { return }
+        let myStringArr = rgba.components(separatedBy: ",")
+        self.tabBarController?.tabBar.tintColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        
+        self.makeNavCartBtn()
         
         if UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) != nil {
             self.wishlistCollectionView.isHidden = false
@@ -73,16 +83,49 @@ class WishlistVC: UIViewController {
             self.getWishlistProductsAPI()
         } else {
             self.wishlistCollectionView.isHidden = true
-            //self.emptyView.isHidden = false
             self.loginView.isHidden = false
-//            isWishlistTab = "yes"
-//            let userStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//            let vc = userStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-//            vc.modalPresentationStyle = .fullScreen
-//            self.navigationController?.pushViewController(vc, animated: true)
+
             
         }
         
+    }
+    
+    func makeNavCartBtn() {
+        
+        if let cartCount = UserDefaults.standard.value(forKey: "cartCount") as? Int {
+            if cartCount == 0 {
+                
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "cart"), style: .plain, target: self, action: #selector(cartTapped))
+                
+            } else {
+                
+                let filterBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+                filterBtn.setImage(UIImage.init(named: "cart"), for: .normal)
+                filterBtn.addTarget(self, action: #selector(cartTapped), for: .touchUpInside)
+                
+                let lblBadge = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 15, height: 15))
+                lblBadge.backgroundColor = UIColor.red
+                lblBadge.clipsToBounds = true
+                lblBadge.layer.cornerRadius = 7
+                lblBadge.textColor = UIColor.white
+                // lblBadge.font = FontLatoRegular(s: 10)
+                lblBadge.textAlignment = .center
+                lblBadge.text = "\(cartCount)"
+                
+                filterBtn.addSubview(lblBadge)
+                
+                self.navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: filterBtn)]
+            }
+        }
+        
+    }
+    
+    @objc func cartTapped() {
+        isWishlistTab = "yes"
+        let userStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = userStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
+        vc.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func getWishlistProductsAPI() {
