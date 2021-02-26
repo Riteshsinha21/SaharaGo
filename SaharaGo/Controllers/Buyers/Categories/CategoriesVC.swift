@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoriesVC: UIViewController {
+class CategoriesVC: SuperViewController {
 
     var categoriesListCopy = [categoryListStruct]()
     

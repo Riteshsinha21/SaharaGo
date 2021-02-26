@@ -7281,7 +7281,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Kw-IL-NJ7">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izP-St-e3U">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
@@ -7805,7 +7805,7 @@
                         <constraints>
                             <constraint firstItem="2Kw-IL-NJ7" firstAttribute="leading" secondItem="9vT-IM-1OL" secondAttribute="leading" id="Kdn-oC-wGg"/>
                             <constraint firstAttribute="bottom" secondItem="2Kw-IL-NJ7" secondAttribute="bottom" id="bwJ-jP-vfn"/>
-                            <constraint firstItem="2Kw-IL-NJ7" firstAttribute="top" secondItem="9vT-IM-1OL" secondAttribute="top" id="exP-i9-Ooz"/>
+                            <constraint firstItem="2Kw-IL-NJ7" firstAttribute="top" secondItem="otu-ce-E88" secondAttribute="top" id="exP-i9-Ooz"/>
                             <constraint firstItem="2Kw-IL-NJ7" firstAttribute="trailing" secondItem="9vT-IM-1OL" secondAttribute="trailing" id="heO-dd-RDH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9vT-IM-1OL"/>
@@ -7816,6 +7816,7 @@
                         <outlet property="cartBadgeLbl" destination="1UF-qM-DoD" id="qMU-uG-X3s"/>
                         <outlet property="categoriesCollView" destination="IZ5-Ga-uX5" id="wt8-lI-bpT"/>
                         <outlet property="countryButton" destination="Nxz-4D-CKY" id="VYh-xh-FOA"/>
+                        <outlet property="headerView" destination="nze-4A-G0s" id="vJe-lC-lXO"/>
                         <outlet property="labelCollectionView" destination="hSy-53-qSW" id="GWx-zh-nok"/>
                         <outlet property="newArrivalCollHeight" destination="Vbe-eT-URN" id="58n-ri-tVH"/>
                         <outlet property="newArrivalCollView" destination="s0O-gU-cCP" id="hA5-8P-nCG"/>

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SubCategoriesVC: UIViewController {
+class SubCategoriesVC: SuperViewController {
     
     var catInfo = categoryListStruct()
     var catId: String = String()
