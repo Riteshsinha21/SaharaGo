@@ -17,7 +17,6 @@ class SuperViewController: UIViewController {
         guard let rgba = countryColorStr.slice(from: "(", to: ")") else { return }
         let myStringArr = rgba.components(separatedBy: ",")
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
-        //self.navigationController?.navigationBar.barTintColor = UIColor.orange
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
     }
