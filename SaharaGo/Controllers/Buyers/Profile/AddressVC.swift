@@ -23,7 +23,7 @@ struct address_Struct {
     
 }
 
-class AddressVC: UIViewController {
+class AddressVC: SuperViewController {
     
     var addressArr = [address_Struct]()
     var defaultAddressArr = [address_Struct]()

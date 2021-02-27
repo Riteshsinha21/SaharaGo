@@ -8,7 +8,7 @@
 import UIKit
 import Cosmos
 
-class OrderHistoryVC: UIViewController {
+class OrderHistoryVC: SuperViewController {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var emptyView: UIView!

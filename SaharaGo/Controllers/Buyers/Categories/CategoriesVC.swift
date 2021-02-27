@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoriesVC: UIViewController {
+class CategoriesVC: SuperViewController {
 
     var categoriesListCopy = [categoryListStruct]()
     
@@ -31,7 +31,7 @@ class CategoriesVC: UIViewController {
             if cartCount == 0 {
                 self.cartBadgeLbl.isHidden = true
             } else {
-                self.cartBadgeLbl.isHidden = false
+                //self.cartBadgeLbl.isHidden = false
                 self.cartBadgeLbl.text = "\(cartCount)"
             }
             
@@ -44,7 +44,7 @@ class CategoriesVC: UIViewController {
             if cartCount == 0 {
                 self.cartBadgeLbl.isHidden = true
             } else {
-                self.cartBadgeLbl.isHidden = false
+               // self.cartBadgeLbl.isHidden = false
                 let cartCountDic = notification.userInfo?["userInfo"] as? [String: Any] ?? [:]
                 self.cartBadgeLbl.text = "\(String(describing: cartCountDic["cartCount"]!))"
             }
@@ -56,10 +56,19 @@ class CategoriesVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationBar.topItem?.title = "Shop by Category"
         
-       navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "cart"), style: .plain, target: self, action: #selector(cartTapped))
-        //navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "country"), style: .plain, target: self, action: #selector(countryTapped))
+        guard let countryColorStr = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.COUNTRY_COLOR_CODE) as? String else {return}
+        guard let rgba = countryColorStr.slice(from: "(", to: ")") else { return }
+        let myStringArr = rgba.components(separatedBy: ",")
+        self.tabBarController?.tabBar.tintColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        
+        self.makeNavCartBtn()
+      // navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "cart"), style: .plain, target: self, action: #selector(cartTapped))
 
         self.tabBarController?.tabBar.isHidden = false
         
@@ -71,10 +80,43 @@ class CategoriesVC: UIViewController {
             self.emptyView.isHidden = true
         }
     }
+    
+    func makeNavCartBtn() {
+        
+        if let cartCount = UserDefaults.standard.value(forKey: "cartCount") as? Int {
+            if cartCount == 0 {
+                
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "cart"), style: .plain, target: self, action: #selector(cartTapped))
+                
+            } else {
+                
+                let filterBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+                filterBtn.setImage(UIImage.init(named: "cart"), for: .normal)
+                filterBtn.addTarget(self, action: #selector(cartTapped), for: .touchUpInside)
+                
+                let lblBadge = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 15, height: 15))
+                lblBadge.backgroundColor = UIColor.red
+                lblBadge.clipsToBounds = true
+                lblBadge.layer.cornerRadius = 7
+                lblBadge.textColor = UIColor.white
+                // lblBadge.font = FontLatoRegular(s: 10)
+                lblBadge.textAlignment = .center
+                lblBadge.text = "\(cartCount)"
+                
+                filterBtn.addSubview(lblBadge)
+                
+                self.navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: filterBtn)]
+            }
+        }
+        
+        
+        
+        
+    }
 
     @objc func cartTapped() {
         let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sellerStoryboard.instantiateViewController(withIdentifier: "CartVC") as! CartVC
+        let vc = sellerStoryboard.instantiateViewController(withIdentifier: "CartNewVC") as! CartNewVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
 

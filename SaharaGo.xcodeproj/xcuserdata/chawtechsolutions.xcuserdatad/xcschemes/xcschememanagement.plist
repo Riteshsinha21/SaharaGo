@@ -7,7 +7,11 @@
 		<key>SaharaGo.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
+<<<<<<< HEAD
 			<integer>38</integer>
+=======
+			<integer>43</integer>
+>>>>>>> 30bfaccc12e500b0b4cfcc131e33f519153a1299
 		</dict>
 	</dict>
 </dict>

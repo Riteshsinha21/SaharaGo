@@ -586,3 +586,48 @@ extension UILabel {
         return self.text!.count
     }
 }
+
+//func chnageBtnColour() {
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//
+//    if let viewControllers = appDelegate.window?.rootViewController?.presentedViewController
+//    {
+//        // Array of all viewcontroller even after presented
+//    }
+//    else if let viewControllers = appDelegate.window?.rootViewController?.children
+//    {
+//        // Array of all viewcontroller after push
+//        for i in view.subviews {
+//            if i is UILabel {
+//                let newLbl = i as? UILabel
+//                if newLbl?.tag == 1 {
+//                    /// Write your code
+//                }
+//            }
+//        }
+//    }
+//}
+//
+//func listSubviewsOf(_ view: UIView?) {
+//
+//    // Get the subviews of the view
+//    let subviews = view?.subviews
+//
+//    for subview in subviews ?? [] {
+//
+//        // Do what you want to do with the subview
+//        print("\(subview)")
+//
+//        // List the subviews of subview
+//        listSubviewsOf(subview)
+//    }
+//}
+
+//func changeBtnColour(_ button: UIButton) {
+//    
+//    guard let countryColorStr = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.COUNTRY_COLOR_CODE) as? String else {return}
+//    guard let rgba = countryColorStr.slice(from: "(", to: ")") else { return }
+//    let myStringArr = rgba.components(separatedBy: ",")
+//    button.backgroundColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+//    
+//}

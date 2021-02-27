@@ -9,6 +9,7 @@ import UIKit
 import ImagePicker
 import Alamofire
 import YangMingShan
+import CropViewController
 
 struct image_Struct: Codable {
     var fileName: String = ""
@@ -41,6 +42,12 @@ class SellerAddProductsVC: UIViewController, UITextFieldDelegate {
     let imagePickerController = ImagePickerController()
     
     var picker = UIPickerView()
+    
+    private var image: UIImage?
+    private var croppingStyle = CropViewCroppingStyle.default
+    
+    private var croppedRect = CGRect.zero
+    private var croppedAngle = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,7 +91,10 @@ class SellerAddProductsVC: UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async {
             textField.resignFirstResponder()
         }
+<<<<<<< HEAD
         
+=======
+>>>>>>> 30bfaccc12e500b0b4cfcc131e33f519153a1299
         //call your function here
         self.openActionsheet()
     }
@@ -133,24 +143,20 @@ class SellerAddProductsVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func uploadImgAction(_ sender: Any) {
         
-        //        imagePickerController.delegate = self
-        //        present(imagePickerController, animated: true, completion: nil)
+        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.openCamera()
+        }))
         
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+            self.openGallery()
+        }))
         
-        //        let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        //        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-        //            self.openCamera()
-        //        }))
-        //
-        //        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-        //            self.openGallery()
-        //        }))
-        //
-        //        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        //
-        //        self.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
-        self.openImageVideoPicker()
+        self.present(alert, animated: true, completion: nil)
+        
+        //  self.openImageVideoPicker()
         
     }
     
@@ -214,6 +220,7 @@ class SellerAddProductsVC: UIViewController, UITextFieldDelegate {
     func openCamera()
     {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+            self.croppingStyle = .default
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerController.SourceType.camera
@@ -231,9 +238,10 @@ class SellerAddProductsVC: UIViewController, UITextFieldDelegate {
     func openGallery()
     {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.photoLibrary){
+            self.croppingStyle = .default
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
-            imagePicker.allowsEditing = true
+            imagePicker.allowsEditing = false
             imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
             self.present(imagePicker, animated: true, completion: nil)
         }
@@ -410,9 +418,18 @@ class SellerAddProductsVC: UIViewController, UITextFieldDelegate {
                     let jsonDic = json as! NSDictionary
                     print(jsonDic)
                     
-                    self.imagesStrArr.add(jsonDic.value(forKey: "file") as! String)
+                    self.testArr.append(jsonDic.value(forKey: "file") as! String)
+                    
+                    self.prodImage.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(self.testArr[0])"), placeholderImage: UIImage(named: "edit cat_img"))
+                    
+                    
                     DispatchQueue.main.async {
                         self.view.makeToast("Image Uploaded Successfully.")
+                        if self.testArr.count > 0 {
+                            self.viewAllBtn.isHidden = false
+                        } else {
+                            self.viewAllBtn.isHidden = true
+                        }
                     }
                     
                 } catch {
@@ -576,17 +593,60 @@ extension SellerAddProductsVC: UITextViewDelegate {
     }
 }
 
-extension SellerAddProductsVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension SellerAddProductsVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate, CropViewControllerDelegate {
+    
+    func presentCropViewController(_ image: UIImage) {
+      //let image: UIImage = ... //Load an image
+
+      let cropViewController = CropViewController(image: image)
+      cropViewController.delegate = self
+      present(cropViewController, animated: true, completion: nil)
+    }
+
+    func cropViewController(_ cropViewController: CropViewController, didCropToImage image: UIImage, withRect cropRect: CGRect, angle: Int) {
+            // 'image' is the newly cropped version of the original image
+
+        //self.prodImage.image = image
+        self.requestNativeImageUpload(image: image)
+        cropViewController.dismiss(animated: true, completion: nil)
+
+        }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[.originalImage] as? UIImage {
-            self.prodImage.contentMode = .scaleToFill
-            self.prodImage.image = pickedImage
-            self.requestNativeImageUpload(image: pickedImage)
-            //saveImageDocumentDirectory(usedImage: pickedImage)
-        }
+//        if let pickedImage = info[.originalImage] as? UIImage {
+//            self.prodImage.contentMode = .scaleToFill
+//            self.prodImage.image = pickedImage
+//            self.requestNativeImageUpload(image: pickedImage)
+//            //saveImageDocumentDirectory(usedImage: pickedImage)
+//        }
+//
+//        picker.dismiss(animated: true, completion: nil)
         
-        picker.dismiss(animated: true, completion: nil)
+        guard let image = (info[UIImagePickerController.InfoKey.originalImage] as? UIImage) else { return }
+        
+        let cropController = CropViewController(croppingStyle: croppingStyle, image: image)
+        //cropController.modalPresentationStyle = .fullScreen
+        cropController.delegate = self
+        
+        self.image = image
+        //If profile picture, push onto the same navigation stack
+        if croppingStyle == .circular {
+            if picker.sourceType == .camera {
+                picker.dismiss(animated: true, completion: {
+                    self.present(cropController, animated: true, completion: nil)
+                })
+            } else {
+                picker.pushViewController(cropController, animated: true)
+            }
+        }
+        else { //otherwise dismiss, and then present from the main controller
+            picker.dismiss(animated: true, completion: {
+                self.present(cropController, animated: true, completion: nil)
+                //self.navigationController!.pushViewController(cropController, animated: true)
+            })
+        }
+
+        
         
     }
 }

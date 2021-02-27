@@ -95,6 +95,8 @@ class ProfileDetailVC: UIViewController, CropViewControllerDelegate {
     func openCamera()
     {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+            self.croppingStyle = .default
+            
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerController.SourceType.camera

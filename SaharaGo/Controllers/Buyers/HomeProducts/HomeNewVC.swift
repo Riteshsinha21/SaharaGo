@@ -31,8 +31,9 @@ struct topDeals_Struct {
     var images: [String]?
 }
 
-class HomeNewVC: UIViewController {
+class HomeNewVC: SuperViewController {
     
+    @IBOutlet var headerView: UIView!
     @IBOutlet var cartBadgeLbl: UILabel!
     @IBOutlet var searchBar: UISearchBar!
     @IBOutlet var topDelasEmptyView: UIView!
@@ -147,11 +148,14 @@ class HomeNewVC: UIViewController {
             self.countryButton.sd_setImage(with: URL(string: imageUrl), for: .normal)
         }
         
-        
         guard let countryColorStr = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.COUNTRY_COLOR_CODE) as? String else {return}
         guard let rgba = countryColorStr.slice(from: "(", to: ")") else { return }
         let myStringArr = rgba.components(separatedBy: ",")
         self.tabBarController?.tabBar.tintColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+        self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+        UINavigationBar.appearance().tintColor = UIColor.white
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        //self.headerView.backgroundColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
     }
     
     @objc func countryTapped() {
@@ -780,3 +784,4 @@ extension HomeNewVC: UISearchBarDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+
