@@ -75,6 +75,8 @@
 		7175F104258B25C80026527B /* ForgotPasswordOTPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7175F103258B25C80026527B /* ForgotPasswordOTPVC.swift */; };
 		7175F106258B35C00026527B /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7175F105258B35C00026527B /* WelcomeVC.swift */; };
 		71762AD525E7CAF600FEE9A1 /* SuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71762AD425E7CAF600FEE9A1 /* SuperViewController.swift */; };
+		71762AD825ED2CAF00FEE9A1 /* BuyerVendorsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71762AD725ED2CAF00FEE9A1 /* BuyerVendorsVC.swift */; };
+		71762ADB25ED2CE900FEE9A1 /* FlashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71762ADA25ED2CE900FEE9A1 /* FlashVC.swift */; };
 		7178AACB258CD26800C45CFC /* HomeNewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178AACA258CD26800C45CFC /* HomeNewVC.swift */; };
 		7178AACD258CD5E300C45CFC /* HomeNewCollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178AACC258CD5E300C45CFC /* HomeNewCollCell.swift */; };
 		7178AACF258CD82F00C45CFC /* HomeNewBannerCollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7178AACE258CD82F00C45CFC /* HomeNewBannerCollCell.swift */; };
@@ -252,6 +254,8 @@
 		7175F103258B25C80026527B /* ForgotPasswordOTPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordOTPVC.swift; sourceTree = "<group>"; };
 		7175F105258B35C00026527B /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		71762AD425E7CAF600FEE9A1 /* SuperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperViewController.swift; sourceTree = "<group>"; };
+		71762AD725ED2CAF00FEE9A1 /* BuyerVendorsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyerVendorsVC.swift; sourceTree = "<group>"; };
+		71762ADA25ED2CE900FEE9A1 /* FlashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashVC.swift; sourceTree = "<group>"; };
 		7178AACA258CD26800C45CFC /* HomeNewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewVC.swift; sourceTree = "<group>"; };
 		7178AACC258CD5E300C45CFC /* HomeNewCollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewCollCell.swift; sourceTree = "<group>"; };
 		7178AACE258CD82F00C45CFC /* HomeNewBannerCollCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewBannerCollCell.swift; sourceTree = "<group>"; };
@@ -556,6 +560,22 @@
 			path = UsersInitialControllers;
 			sourceTree = "<group>";
 		};
+		71762AD625ED2C8D00FEE9A1 /* BuyerVendors */ = {
+			isa = PBXGroup;
+			children = (
+				71762AD725ED2CAF00FEE9A1 /* BuyerVendorsVC.swift */,
+			);
+			path = BuyerVendors;
+			sourceTree = "<group>";
+		};
+		71762AD925ED2CC000FEE9A1 /* Flash */ = {
+			isa = PBXGroup;
+			children = (
+				71762ADA25ED2CE900FEE9A1 /* FlashVC.swift */,
+			);
+			name = Flash;
+			sourceTree = "<group>";
+		};
 		719DCD61259AFF6A003EAA4C /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -644,6 +664,8 @@
 		71A566562580E4EC00D9818E /* Buyers */ = {
 			isa = PBXGroup;
 			children = (
+				71762AD925ED2CC000FEE9A1 /* Flash */,
+				71762AD625ED2C8D00FEE9A1 /* BuyerVendors */,
 				71A566422580A09C00D9818E /* Categories */,
 				71A5663B257FC69400D9818E /* HomeProducts */,
 				71A56627257E184500D9818E /* Profile */,
@@ -1068,6 +1090,7 @@
 				71AD56042589CD6D00BE0AD6 /* SellerCatProductsCell.swift in Sources */,
 				718A973325A5C2C700352A2C /* SellerChooseSubCategoryVC.swift in Sources */,
 				719DCD63259AFF8E003EAA4C /* SellerProfileVC.swift in Sources */,
+				71762ADB25ED2CE900FEE9A1 /* FlashVC.swift in Sources */,
 				718B222925C1897C0043E99D /* ProductRatingCell.swift in Sources */,
 				7199A6B425B82A5600FC2D91 /* RatingVC.swift in Sources */,
 				713B0C0825B5CBA000868238 /* SellerViewProductsCollCell.swift in Sources */,
@@ -1152,6 +1175,7 @@
 				714A160B25B065AB00CC2EA1 /* NotificationsCell.swift in Sources */,
 				71A56629257E186000D9818E /* WishlistVC.swift in Sources */,
 				71A5664D2580BA9B00D9818E /* HomeSliderCell.swift in Sources */,
+				71762AD825ED2CAF00FEE9A1 /* BuyerVendorsVC.swift in Sources */,
 				7110A81425ADD8CD0015D264 /* SubcategoriesCell.swift in Sources */,
 				71AD5613258A771200BE0AD6 /* countryCell.swift in Sources */,
 				71A5665E2580E57C00D9818E /* SellerSignUpOTPVC.swift in Sources */,
