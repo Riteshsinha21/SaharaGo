@@ -279,9 +279,9 @@ class ProfileDetailVC: UIViewController, CropViewControllerDelegate {
         self.countryTxt.text = profileInfo.country
         self.profileNameLbl.text = "\(profileInfo.firstName) \(profileInfo.lastName)"
         self.userProfileImg.contentMode = .scaleToFill
-        self.userProfileImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.userImage)"), placeholderImage: UIImage(named: "pp"))
+        self.userProfileImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.userImage)"), placeholderImage: UIImage(named: "profile-1"))
         self.userCoverImg.contentMode = .scaleToFill
-        self.userCoverImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.coverImage)"), placeholderImage: UIImage(named: "cover"))
+        self.userCoverImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.coverImage)"), placeholderImage: UIImage(named: "cover-1"))
         
         if profileInfo.userImage.count > 0 && profileInfo.coverImage.count == 0 {
             self.metaDataDic.setValue(profileInfo.userImage, forKey: "image")

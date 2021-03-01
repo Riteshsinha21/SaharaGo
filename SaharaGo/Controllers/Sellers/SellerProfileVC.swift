@@ -165,8 +165,8 @@ class SellerProfileVC: UIViewController, UIPickerViewDelegate, CropViewControlle
         self.streetAddressTxt.text = profileInfo.streetAddress
         self.landmarkTxt.text = profileInfo.landmark
        // self.userProfileImg.contentMode = .scaleToFill
-        self.userProfileImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.userImage)"), placeholderImage: UIImage(named: "pp"))
-        self.userCoverImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.coverImage)"), placeholderImage: UIImage(named: "pp"))
+        self.userProfileImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.userImage)"), placeholderImage: UIImage(named: "profile-1"))
+        self.userCoverImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.coverImage)"), placeholderImage: UIImage(named: "cover-1"))
         
         
         if profileInfo.userImage.count > 0 && profileInfo.coverImage.count == 0 {

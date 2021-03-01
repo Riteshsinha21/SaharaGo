@@ -8,7 +8,7 @@
 import UIKit
 import SQLite
 
-class ProfileVC: UIViewController {
+class ProfileVC: SuperViewController {
 
     @IBOutlet var userCoverImg: UIImageView!
     @IBOutlet var userProfileImg: UIImageView!
@@ -89,9 +89,9 @@ class ProfileVC: UIViewController {
     func setData(_ profileInfo: profileDetail_Struct) {
         
         self.userProfileImg.contentMode = .scaleToFill
-        self.userProfileImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.userImage)"), placeholderImage: UIImage(named: "pp"))
+        self.userProfileImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.userImage)"), placeholderImage: UIImage(named: "profile-1"))
         self.userCoverImg.contentMode = .scaleToFill
-        self.userCoverImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.coverImage)"), placeholderImage: UIImage(named: "cover"))
+        self.userCoverImg.sd_setImage(with: URL(string: FILE_BASE_URL + "/\(profileInfo.coverImage)"), placeholderImage: UIImage(named: "cover-1"))
     }
     
     @IBAction func ordersAction(_ sender: Any) {

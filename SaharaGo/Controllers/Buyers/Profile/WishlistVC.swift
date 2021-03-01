@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WishlistVC: UIViewController {
+class WishlistVC: SuperViewController {
     
     @IBOutlet var loginView: UIView!
     @IBOutlet var emptyView: UIView!

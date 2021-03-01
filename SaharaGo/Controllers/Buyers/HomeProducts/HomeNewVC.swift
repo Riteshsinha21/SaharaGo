@@ -166,7 +166,8 @@ class HomeNewVC: SuperViewController {
     }
     
     func setUpUI() {
-        let logoImage = UIImage.init(named: "SaharaGo new logo-1")
+       // let logoImage = UIImage.init(named: "SaharaGo new logo-1")
+        let logoImage = UIImage.init(named: "logo")
         let logoImageView = UIImageView.init(image: logoImage)
         //CGRectMake(-40, 0, 150, 25)
        // logoImageView.frame = CGRect(x: -10, y: 0, width: 150, height: 25)
