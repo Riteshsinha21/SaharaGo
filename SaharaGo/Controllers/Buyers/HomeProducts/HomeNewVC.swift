@@ -130,12 +130,13 @@ class HomeNewVC: SuperViewController {
         super.viewWillAppear(true)
         
         self.cartBadgeLbl.layer.cornerRadius = 10
-        self.navigationController?.navigationBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
         
-        // navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "cart"), style: .plain, target: self, action: #selector(cartTapped))
+        // navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "bag"), style: .plain, target: self, action: #selector(cartTapped))
         //navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "country"), style: .plain, target: self, action: #selector(countryTapped))
         isHome = "no"
         self.tabBarController?.tabBar.isHidden = false
+        self.makeNavCartBtn()
         self.getCategoriesList()
         if let country = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.SELECTED_COUNTRY) as? String {
             getBanners()
@@ -155,7 +156,112 @@ class HomeNewVC: SuperViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        
+//        self.addNavBarImage()
+        //self.makeNavCartBtn()
+        self.addCartBtns()
+        self.setUpUI()
+        //self.navigationItem.titleView = UIImageView(image: UIImage(named: "SaharaGo new logo-1"))
         //self.headerView.backgroundColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+    }
+    
+    func setUpUI() {
+        let logoImage = UIImage.init(named: "SaharaGo new logo-1")
+        let logoImageView = UIImageView.init(image: logoImage)
+        //CGRectMake(-40, 0, 150, 25)
+       // logoImageView.frame = CGRect(x: -10, y: 0, width: 150, height: 25)
+        logoImageView.contentMode = .scaleAspectFit
+        let imageItem = UIBarButtonItem.init(customView: logoImageView)
+        let negativeSpacer = UIBarButtonItem.init(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        negativeSpacer.width = 0
+        navigationItem.leftBarButtonItems = [imageItem]
+    }
+    
+    func makeNavCartBtn() {
+        
+        if let cartCount = UserDefaults.standard.value(forKey: "cartCount") as? Int {
+            if cartCount == 0 {
+                
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "bag"), style: .plain, target: self, action: #selector(cartTapped))
+                
+            } else {
+                
+                let filterBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+                filterBtn.setImage(UIImage.init(named: "bag"), for: .normal)
+                filterBtn.addTarget(self, action: #selector(cartTapped), for: .touchUpInside)
+                
+                let lblBadge = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 15, height: 15))
+                lblBadge.backgroundColor = UIColor.white
+                lblBadge.clipsToBounds = true
+                lblBadge.layer.cornerRadius = 7
+                lblBadge.textColor = UIColor.black
+                lblBadge.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+                lblBadge.textAlignment = .center
+                lblBadge.text = "\(cartCount)"
+                
+                self.navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: filterBtn)]
+            }
+        }
+        
+    }
+    
+    func addCartBtns() {
+
+        if let cartCount = UserDefaults.standard.value(forKey: "cartCount") as? Int {
+        if cartCount == 0 {
+            
+            let search = UIBarButtonItem(image: UIImage(named: "search-1"), style: .plain, target: self, action: #selector(searchTapped))
+            let notification = UIBarButtonItem(image: UIImage(named: "noti"), style: .plain, target: self, action: #selector(notificationTapped))
+            let wishlist = UIBarButtonItem(image: UIImage(named: "wishlist-2"), style: .plain, target: self, action: #selector(wishlistTapped))
+            let cart = UIBarButtonItem(image: UIImage(named: "bag"), style: .plain, target: self, action: #selector(cartTapped))
+            
+            self.navigationItem.rightBarButtonItems = [cart, wishlist, notification, search]
+            
+        } else {
+            
+            let search = UIBarButtonItem(image: UIImage(named: "search-1"), style: .plain, target: self, action: #selector(searchTapped))
+            let notification = UIBarButtonItem(image: UIImage(named: "noti"), style: .plain, target: self, action: #selector(notificationTapped))
+            let wishlist = UIBarButtonItem(image: UIImage(named: "wishlist-2"), style: .plain, target: self, action: #selector(wishlistTapped))
+            let filterBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
+            filterBtn.setImage(UIImage.init(named: "bag"), for: .normal)
+            filterBtn.addTarget(self, action: #selector(cartTapped), for: .touchUpInside)
+            
+            let lblBadge = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 15, height: 15))
+            lblBadge.backgroundColor = UIColor.white
+            lblBadge.clipsToBounds = true
+            lblBadge.layer.cornerRadius = 7
+            lblBadge.textColor = UIColor.black
+            lblBadge.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+            lblBadge.textAlignment = .center
+            lblBadge.text = "\(cartCount)"
+            
+            filterBtn.addSubview(lblBadge)
+            self.navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: filterBtn), wishlist, notification, search]
+            }
+        
+        }
+        
+        
+    }
+    
+    
+    func addNavBarImage() {
+
+        let navController = navigationController!
+
+        let image = UIImage(named: "SaharaGo new logo-1") //Your logo url here
+        let imageView = UIImageView(image: image)
+
+        let bannerWidth = navController.navigationBar.frame.size.width
+        let bannerHeight = navController.navigationBar.frame.size.height
+
+        let bannerX = bannerWidth / 2 - (image?.size.width)! / 2
+        let bannerY = bannerHeight / 2 - (image?.size.height)! / 2
+
+        imageView.frame = CGRect(x: bannerX, y: bannerY, width: bannerWidth, height: bannerHeight)
+        imageView.contentMode = .scaleAspectFit
+
+        navigationItem.titleView = imageView
     }
     
     @objc func countryTapped() {
@@ -163,9 +269,26 @@ class HomeNewVC: SuperViewController {
     }
     
     @objc func cartTapped() {
-        //        let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        //        let vc = sellerStoryboard.instantiateViewController(withIdentifier: "CartVC") as! CartVC
-        //        self.navigationController?.pushViewController(vc, animated: true)
+        let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sellerStoryboard.instantiateViewController(withIdentifier: "CartNewVC") as! CartNewVC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func searchTapped() {
+        let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sellerStoryboard.instantiateViewController(withIdentifier: "SearchProductsVC") as! SearchProductsVC
+        //vc.catId = info.id
+        vc.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func wishlistTapped() {
+        let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sellerStoryboard.instantiateViewController(withIdentifier: "WishlistVC") as! WishlistVC
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func notificationTapped() {
+        let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sellerStoryboard.instantiateViewController(withIdentifier: "NotificationsVC") as! NotificationsVC
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func createTable() {

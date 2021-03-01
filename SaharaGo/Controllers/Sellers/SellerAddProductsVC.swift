@@ -91,10 +91,7 @@ class SellerAddProductsVC: UIViewController, UITextFieldDelegate {
         DispatchQueue.main.async {
             textField.resignFirstResponder()
         }
-<<<<<<< HEAD
-        
-=======
->>>>>>> 30bfaccc12e500b0b4cfcc131e33f519153a1299
+
         //call your function here
         self.openActionsheet()
     }

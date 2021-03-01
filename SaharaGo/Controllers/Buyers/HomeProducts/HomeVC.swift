@@ -54,7 +54,7 @@ class HomeVC: UIViewController {
         
         self.navigationController?.navigationBar.isHidden = false
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "cart"), style: .plain, target: self, action: #selector(cartTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "bag"), style: .plain, target: self, action: #selector(cartTapped))
         //navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "country"), style: .plain, target: self, action: #selector(countryTapped))
 
         self.tabBarController?.tabBar.isHidden = false

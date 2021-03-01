@@ -68,7 +68,7 @@ class CategoriesVC: SuperViewController {
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
         
         self.makeNavCartBtn()
-      // navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "cart"), style: .plain, target: self, action: #selector(cartTapped))
+      // navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "bag"), style: .plain, target: self, action: #selector(cartTapped))
 
         self.tabBarController?.tabBar.isHidden = false
         
@@ -86,20 +86,20 @@ class CategoriesVC: SuperViewController {
         if let cartCount = UserDefaults.standard.value(forKey: "cartCount") as? Int {
             if cartCount == 0 {
                 
-                navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "cart"), style: .plain, target: self, action: #selector(cartTapped))
+                navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "bag"), style: .plain, target: self, action: #selector(cartTapped))
                 
             } else {
                 
                 let filterBtn = UIButton.init(frame: CGRect.init(x: 0, y: 0, width: 30, height: 30))
-                filterBtn.setImage(UIImage.init(named: "cart"), for: .normal)
+                filterBtn.setImage(UIImage.init(named: "bag"), for: .normal)
                 filterBtn.addTarget(self, action: #selector(cartTapped), for: .touchUpInside)
                 
                 let lblBadge = UILabel.init(frame: CGRect.init(x: 20, y: 0, width: 15, height: 15))
-                lblBadge.backgroundColor = UIColor.red
+                lblBadge.backgroundColor = UIColor.white
                 lblBadge.clipsToBounds = true
                 lblBadge.layer.cornerRadius = 7
-                lblBadge.textColor = UIColor.white
-                // lblBadge.font = FontLatoRegular(s: 10)
+                lblBadge.textColor = UIColor.black
+                lblBadge.font = UIFont.systemFont(ofSize: 10, weight: .regular)
                 lblBadge.textAlignment = .center
                 lblBadge.text = "\(cartCount)"
                 
