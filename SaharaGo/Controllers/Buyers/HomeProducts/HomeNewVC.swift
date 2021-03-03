@@ -58,6 +58,7 @@ class HomeNewVC: SuperViewController {
     
     var currentCellIndex = 0
     var timer:Timer?
+    var flagBtn = UIBarButtonItem()
     
     @IBOutlet weak var newArrivalCollHeight: NSLayoutConstraint!
     
@@ -136,7 +137,7 @@ class HomeNewVC: SuperViewController {
         //navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.init(named: "country"), style: .plain, target: self, action: #selector(countryTapped))
         isHome = "no"
         self.tabBarController?.tabBar.isHidden = false
-        self.makeNavCartBtn()
+        //self.makeNavCartBtn()
         self.getCategoriesList()
         if let country = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.SELECTED_COUNTRY) as? String {
             getBanners()
@@ -215,8 +216,16 @@ class HomeNewVC: SuperViewController {
             let notification = UIBarButtonItem(image: UIImage(named: "noti"), style: .plain, target: self, action: #selector(notificationTapped))
             let wishlist = UIBarButtonItem(image: UIImage(named: "wishlist-2"), style: .plain, target: self, action: #selector(wishlistTapped))
             let cart = UIBarButtonItem(image: UIImage(named: "bag"), style: .plain, target: self, action: #selector(cartTapped))
+            if let flag = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.SELECTED_FLAG) as? String {
+                let imageUrl = FLAG_BASE_URL + "/" + flag
+                let url = URL(string: imageUrl)!
+                flagBtn = UIBarButtonItem(image: UIImage(named: "bag"), style: .plain, target: self, action: #selector(countryTapped))
+                downloadImage(from: url)
+                
+                //self.countryButton.sd_setImage(with: URL(string: imageUrl), for: .normal)
+            }
             
-            self.navigationItem.rightBarButtonItems = [cart, wishlist, notification, search]
+            self.navigationItem.rightBarButtonItems = [flagBtn, cart, wishlist, notification, search]
             
         } else {
             
@@ -237,7 +246,16 @@ class HomeNewVC: SuperViewController {
             lblBadge.text = "\(cartCount)"
             
             filterBtn.addSubview(lblBadge)
-            self.navigationItem.rightBarButtonItems = [UIBarButtonItem.init(customView: filterBtn), wishlist, notification, search]
+            
+            if let flag = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.SELECTED_FLAG) as? String {
+                let imageUrl = FLAG_BASE_URL + "/" + flag
+                let url = URL(string: imageUrl)!
+                flagBtn = UIBarButtonItem(image: UIImage(named: "bag"), style: .plain, target: self, action: #selector(countryTapped))
+                downloadImage(from: url)
+                //self.countryButton.sd_setImage(with: URL(string: imageUrl), for: .normal)
+            }
+            
+            self.navigationItem.rightBarButtonItems = [flagBtn, UIBarButtonItem.init(customView: filterBtn), wishlist, notification, search]
             }
         
         }
@@ -245,6 +263,22 @@ class HomeNewVC: SuperViewController {
         
     }
     
+    func downloadImage(from url: URL) {
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() { [weak self] in
+                self?.flagBtn.image = UIImage(data: data)
+               // self?.imageView.image = UIImage(data: data)
+            }
+        }
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
     
     func addNavBarImage() {
 
@@ -266,7 +300,11 @@ class HomeNewVC: SuperViewController {
     }
     
     @objc func countryTapped() {
-        
+        let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sellerStoryboard.instantiateViewController(withIdentifier: "ChooseCountryVC") as! ChooseCountryVC
+        isHome = "yes"
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func cartTapped() {

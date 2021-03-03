@@ -101,9 +101,21 @@ extension ChooseCountryVC: UITableViewDelegate, UITableViewDataSource {
         
         countryColorCode = info.colorCode
         
+//        if UserDefaults.standard.value(forKey: "userInterest") != nil {
+//            if userInterestStr == "Buy" {
+//                self.navigationController?.popViewController(animated: true)
+//            } else {
+//                let userStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//                let viewController = userStoryboard.instantiateViewController(withIdentifier: "ChooseCountryVC") as! ChooseCountryVC
+//                UIApplication.shared.delegate!.window!!.rootViewController = viewController
+//            }
+//        }
+        
+        
+        
         if UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) != nil {
             delegate?.onSelectCountry(country: info)
-            
+
             self.navigationController?.popViewController(animated: true)
         } else {
             let userStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
