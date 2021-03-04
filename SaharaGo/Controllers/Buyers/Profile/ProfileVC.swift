@@ -10,6 +10,7 @@ import SQLite
 
 class ProfileVC: SuperViewController {
 
+    @IBOutlet var startSellingBtn: CustomButtonClass!
     @IBOutlet var userCoverImg: UIImageView!
     @IBOutlet var userProfileImg: UIImageView!
     @IBOutlet var logOutBtn: UIButton!
@@ -40,7 +41,8 @@ class ProfileVC: SuperViewController {
         guard let rgba = countryColorStr.slice(from: "(", to: ")") else { return }
         let myStringArr = rgba.components(separatedBy: ",")
         self.logOutBtn.backgroundColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
-        
+        self.startSellingBtn.setTitleColor(UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue)), for: .normal)
+        self.startSellingBtn.borderColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
         
         
         if UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) == nil {
@@ -221,6 +223,12 @@ class ProfileVC: SuperViewController {
         
     }
     
+    @IBAction func startSellingAction(_ sender: Any) {
+        UserDefaults.standard.set("Sell", forKey: "userInterest")
+        let userStoryboard: UIStoryboard = UIStoryboard(name: "Seller", bundle: nil)
+        let viewController = userStoryboard.instantiateViewController(withIdentifier: "SellerLoginVC") as! SellerLoginVC
+        UIApplication.shared.delegate!.window!!.rootViewController = viewController
+    }
     
 
 }

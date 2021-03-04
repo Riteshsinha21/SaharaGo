@@ -119,6 +119,7 @@ class ProductDetailsVC: SuperViewController {
         self.tabBarController?.tabBar.isHidden = false
         isWishlist = "no"
         self.makeNavCartBtn()
+        self.prodTitle.font = UIFont(name: "Poppins-Medium", size: 17)
     }
     
 //    @objc func updateCartBadge(_ notification: Notification) {

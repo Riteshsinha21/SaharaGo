@@ -9,6 +9,7 @@ import UIKit
 
 class WishlistVC: SuperViewController {
     
+    @IBOutlet var startSellingBtn: UIButton!
     @IBOutlet var loginView: UIView!
     @IBOutlet var emptyView: UIView!
     @IBOutlet var cartBadgeLbl: UILabel!
@@ -73,6 +74,8 @@ class WishlistVC: SuperViewController {
         self.navigationController?.navigationBar.barTintColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
         UINavigationBar.appearance().tintColor = UIColor.white
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.startSellingBtn.setTitleColor(UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue)), for: .normal)
+        self.startSellingBtn.borderColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
         
         self.makeNavCartBtn()
         
@@ -545,6 +548,12 @@ class WishlistVC: SuperViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    @IBAction func startSellingAction(_ sender: Any) {
+        UserDefaults.standard.set("Sell", forKey: "userInterest")
+        let userStoryboard: UIStoryboard = UIStoryboard(name: "Seller", bundle: nil)
+        let viewController = userStoryboard.instantiateViewController(withIdentifier: "SellerLoginVC") as! SellerLoginVC
+        UIApplication.shared.delegate!.window!!.rootViewController = viewController
+    }
     
 }
 

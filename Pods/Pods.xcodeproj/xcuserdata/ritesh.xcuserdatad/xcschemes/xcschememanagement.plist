@@ -18,6 +18,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>AuthorizeNetAccept.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>43</integer>
+		</dict>
 		<key>Braintree-Braintree-Drop-In-Localization.xcscheme</key>
 		<dict>
 			<key>isShown</key>

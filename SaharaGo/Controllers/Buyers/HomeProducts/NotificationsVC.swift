@@ -15,6 +15,7 @@ struct Notification_List {
 
 class NotificationsVC: UIViewController {
 
+    @IBOutlet var startSellingBtn: UIButton!
     @IBOutlet var emptyView: UIView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var loginView: UIView!
@@ -41,6 +42,19 @@ class NotificationsVC: UIViewController {
             self.getNotificationList()
         }
         
+        guard let countryColorStr = UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.COUNTRY_COLOR_CODE) as? String else {return}
+        guard let rgba = countryColorStr.slice(from: "(", to: ")") else { return }
+        let myStringArr = rgba.components(separatedBy: ",")
+        self.startSellingBtn.setTitleColor(UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue)), for: .normal)
+        self.startSellingBtn.borderColor = UIColor(red: CGFloat((myStringArr[0] as NSString).doubleValue/255.0), green: CGFloat((myStringArr[1] as NSString).doubleValue/255.0), blue: CGFloat((myStringArr[2] as NSString).doubleValue/255.0), alpha: CGFloat((myStringArr[3] as NSString).doubleValue))
+        
+    }
+    
+    @IBAction func startSellingAction(_ sender: Any) {
+        UserDefaults.standard.set("Sell", forKey: "userInterest")
+        let userStoryboard: UIStoryboard = UIStoryboard(name: "Seller", bundle: nil)
+        let viewController = userStoryboard.instantiateViewController(withIdentifier: "SellerLoginVC") as! SellerLoginVC
+        UIApplication.shared.delegate!.window!!.rootViewController = viewController
     }
     
     @IBAction func loginAction(_ sender: Any) {
