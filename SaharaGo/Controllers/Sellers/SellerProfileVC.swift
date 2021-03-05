@@ -70,12 +70,13 @@ class SellerProfileVC: UIViewController, UIPickerViewDelegate, CropViewControlle
         self.picker.delegate = self
         self.picker.dataSource = self
         self.countryTxt.inputView = picker
+        self.getVendorProfile()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        self.getVendorProfile()
+        //self.getVendorProfile()
         
     }
     

@@ -124,10 +124,8 @@ class WishlistVC: SuperViewController {
     }
     
     @objc func cartTapped() {
-        isWishlistTab = "yes"
-        let userStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = userStoryboard.instantiateViewController(withIdentifier: "LoginVC") as! LoginVC
-        vc.modalPresentationStyle = .fullScreen
+        let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sellerStoryboard.instantiateViewController(withIdentifier: "CartNewVC") as! CartNewVC
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
