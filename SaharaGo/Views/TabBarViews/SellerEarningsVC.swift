@@ -132,7 +132,7 @@ extension SellerEarningsVC: UITableViewDelegate, UITableViewDataSource {
         let headerLabel = UILabel(frame: CGRect(x: 10, y: 0, width: headerView.frame.width - 10, height: headerView.frame.height - 10))
         headerLabel.text = "EARNING LIST:"
 
-        headerLabel.font = UIFont.boldSystemFont(ofSize: 12)
+        headerLabel.font = UIFont(name: "Poppins-Medium", size: 12)
         headerView.addSubview(headerLabel)
         
         return headerView

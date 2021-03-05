@@ -38,6 +38,15 @@ class RatingVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
         
+        if orderInfo.cartMetaData[0].isRated {
+            self.ratingView.settings.updateOnTouch = false
+            self.reviewTxtview.isUserInteractionEnabled = false
+            
+            self.reviewTxtview.text = orderInfo.cartMetaData[0].userReview
+            self.rating = Double(orderInfo.cartMetaData[0].userRating)
+            self.ratingView.rating = Double(orderInfo.cartMetaData[0].userRating)
+        }
+        
     }
     
     @IBAction func notNowAction(_ sender: Any) {
@@ -45,13 +54,16 @@ class RatingVC: UIViewController {
     }
     
     @IBAction func subitAction(_ sender: Any) {
-        if self.rating == 0.00 {
-            self.view.makeToast("Please give Star rating as per your experience.")
-            return
+        if orderInfo.cartMetaData[0].isRated {
+            self.view.makeToast("You can't edit your ratings for now.")
+        } else {
+            if self.rating == 0.00 {
+                self.view.makeToast("Please give Star rating as per your experience.")
+                return
+            }
+            
+            self.giveRatingApiCall()
         }
-        
-        self.giveRatingApiCall()
-        
     }
     
 

@@ -30,12 +30,8 @@ class SourcingVC: UIViewController {
         self.getCategoriesList()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        
-        categoryIdArr.removeAllObjects()
-    }
-    
     @IBAction func backBtnAction(_ sender: Any) {
+        categoryIdArr.removeAllObjects()
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -132,6 +128,7 @@ extension SourcingVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let info = self.categoriesList[indexPath.row]
+        categoryIdArr.add(info.id)
         if info.isSubCategoryAvailable {
             let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Seller", bundle: nil)
             let vc = sellerStoryboard.instantiateViewController(withIdentifier: "SourcingSubCategoriesVC") as! SourcingSubCategoriesVC
@@ -148,7 +145,7 @@ extension SourcingVC: UICollectionViewDelegate, UICollectionViewDataSource {
             self.present(vc, animated: true, completion: nil)
             //self.navigationController?.pushViewController(vc, animated: true)
         }
-        categoryIdArr.add(info.id)
+        
         
     }
     

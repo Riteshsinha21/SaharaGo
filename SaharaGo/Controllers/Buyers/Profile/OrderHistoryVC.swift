@@ -80,6 +80,8 @@ class OrderHistoryVC: SuperViewController {
                         let orderId = json["orderList"][i]["orderId"].stringValue
                         let totalPrice = json["orderList"][i]["totalPrice"].stringValue
                         let isRated = json["orderList"][i]["isRated"].boolValue
+                        let userRating = json["orderList"][i]["rating"].doubleValue
+                        let userReview = json["orderList"][i]["review"].stringValue
 
                         let firstName = json["orderList"][i]["addressMetaData"]["firstName"].stringValue
                         let lastName = json["orderList"][i]["addressMetaData"]["lastName"].stringValue
@@ -109,7 +111,7 @@ class OrderHistoryVC: SuperViewController {
                             let rating = json["orderList"][i]["cartMetaData"]["items"][j]["rating"].doubleValue
 
 
-                            self.cartDataArr.append(current_order_cartData_struct.init(itemId: itemId, productId: productId, price: price, discountedPrice: discountedPrice, name: name, currency: currency, quantity: quantity,discountPercent: discountPercent, stock: stock, totalPrice: totalPrice, isRated: isRated, metaData: current_order_metaData_struct.init(images: images ?? [], description: description), rating: rating))
+                            self.cartDataArr.append(current_order_cartData_struct.init(itemId: itemId, productId: productId, price: price, discountedPrice: discountedPrice, name: name, currency: currency, quantity: quantity,discountPercent: discountPercent, stock: stock, totalPrice: totalPrice, isRated: isRated, metaData: current_order_metaData_struct.init(images: images ?? [], description: description), rating: rating, userRating: userRating, userReview: userReview))
                         }
 
                         self.OrderHistoryArr.append(current_order_Address_main_struct.init(orderState: orderState, totalPrice: totalPrice, orderId: orderId, country: country, state: state, lastName: lastName, firstName: firstName, city: city, phone: phone, zipcode: zipcode, streetAddress: streetAddress, landmark: landmark, cartMetaData: self.cartDataArr))
@@ -166,14 +168,16 @@ extension OrderHistoryVC: UITableViewDelegate, UITableViewDataSource {
             cell.cellPriceLbl.text = "\(info.cartMetaData[0].currency) \(info.cartMetaData[0].discountedPrice)"
             cell.celldesclbl.text = info.cartMetaData[0].metaData.description
             
-            cell.productRatingView.rating = Double(info.cartMetaData[0].rating)
+            cell.productRatingView.rating = Double(info.cartMetaData[0].userRating)
             cell.productRatingView.settings.updateOnTouch = false
             cell.productRatingView.settings.fillMode = .precise
             
             if info.cartMetaData[0].isRated {
-                cell.ratingView.isHidden = true
+                cell.ratingView.isHidden = false
+                cell.cellRatingBtn.setTitle("View Your Rating", for: .normal)
             } else {
                 cell.ratingView.isHidden = false
+                cell.cellRatingBtn.setTitle("Rate your Experience", for: .normal)
             }
             
             if info.cartMetaData[0].metaData.images.count > 0 {

@@ -13,7 +13,8 @@ class OrderHistoryRatingCell: UITableViewCell {
     @IBOutlet var productRatingView: CosmosView!
     @IBOutlet var ratingView: UIView!
 
-       @IBOutlet var celldesclbl: UILabel!
+    @IBOutlet weak var cellRatingBtn: UIButton!
+    @IBOutlet var celldesclbl: UILabel!
        @IBOutlet var cellPriceLbl: UILabel!
        @IBOutlet var cellTitleLbl: UILabel!
        @IBOutlet var cellImg: UIImageView!

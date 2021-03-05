@@ -34,6 +34,7 @@ class SellerOrdersVC: UIViewController, UIPickerViewDelegate {
     var orderId = ""
     var orderStatus = "Confirmed"
     var orderTitleStatus = "Current"
+    var SortByString = ""
   
     var picker = UIPickerView()
     var toolBar = UIToolbar()
@@ -89,22 +90,27 @@ class SellerOrdersVC: UIViewController, UIPickerViewDelegate {
         let alert = UIAlertController(title: "Sort By", message: "", preferredStyle: .actionSheet)
         
         alert.addAction(UIAlertAction(title: "New", style: .default , handler:{ (UIAlertAction)in
+            self.SortByString = "New"
             self.getFilteredOrder("Payment_Completed")
         }))
         
         alert.addAction(UIAlertAction(title: "Confirmed", style: .default , handler:{ (UIAlertAction)in
+            self.SortByString = "Confirmed"
             self.getFilteredOrder("Confirmed")
         }))
         
         alert.addAction(UIAlertAction(title: "Packed", style: .default , handler:{ (UIAlertAction)in
+            self.SortByString = "Packed"
             self.getFilteredOrder("Packed")
         }))
         
         alert.addAction(UIAlertAction(title: "Shipped", style: .default , handler:{ (UIAlertAction)in
+            self.SortByString = "Shipped"
             self.getFilteredOrder("Shipped")
         }))
         
         alert.addAction(UIAlertAction(title: "Remove Filter", style: .default, handler:{ (UIAlertAction)in
+            self.SortByString = "Remove Filter"
             self.getCurrentOrders()
         }))
         
@@ -598,20 +604,20 @@ class SellerOrdersVC: UIViewController, UIPickerViewDelegate {
         orderId = selectedInfo.orderId
         let title = sender.titleLabel!.text!
 
-        if title == "Confirmed" {
+        if title == "Mark Confirmed" {
             self.orderStatus = "Confirmed"
-        } else if title == "Packed" {
+        } else if title == "Mark Packed" {
             self.orderStatus = "Packed"
-        } else if title == "Shipped" {
+        } else if title == "Mark Shipped" {
             self.orderStatus = "Shipped"
-        } else if title == "Delivered" {
+        } else if title == "Mark Delivered" {
             self.orderStatus = "Delivered"
         }
         
         let sellerStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = sellerStoryboard.instantiateViewController(withIdentifier: "PopupVC") as! PopupVC
         vc.titleStr = "Change Order State"
-        vc.msgStr = "Do you want to change the state from \(currentStatus) to \(self.orderStatus) for this item?"
+        vc.msgStr = "Do you want to change the status of the order from \(currentStatus) to \(self.orderStatus) ?"
         vc.completionHandlerCallback = {(decision: String!)->Void in
             
             if decision == "yes" {
@@ -649,17 +655,23 @@ extension SellerOrdersVC: UITableViewDelegate, UITableViewDataSource{
         let info = self.currentOrderArr[indexPath.row]
         cell.nameLabel.text = info.firstName
         
+        if self.orderTitleStatus == "Delivered" {
+            cell.statusBtn.isHidden = true
+        } else {
+            cell.statusBtn.isHidden = false
+        }
+        
         if info.orderState == "Payment_Completed" {
-            cell.statusBtn.setTitle("Confirmed", for: .normal)
+            cell.statusBtn.setTitle("Mark Confirmed", for: .normal)
 //            self.orderStatus = "Confirmed"
         } else if info.orderState == "Confirmed" {
-            cell.statusBtn.setTitle("Packed", for: .normal)
+            cell.statusBtn.setTitle("Mark Packed", for: .normal)
 //            self.orderStatus = "Packed"
         } else if info.orderState == "Packed" {
-            cell.statusBtn.setTitle("Shipped", for: .normal)
+            cell.statusBtn.setTitle("Mark Shipped", for: .normal)
 //            self.orderStatus = "Shipped"
         } else if info.orderState == "Shipped" {
-            cell.statusBtn.setTitle("Delivered", for: .normal)
+            cell.statusBtn.setTitle("Mark Delivered", for: .normal)
             //self.orderStatus = "Delivered"
         } else if info.orderState == "Delivered" {
             cell.statusBtn.isHidden = true
@@ -694,7 +706,46 @@ extension SellerOrdersVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 125
+        if self.orderTitleStatus == "Delivered" {
+            return 121
+        } else {
+            return 145
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
+        headerView.backgroundColor = .clear
+        let headerLabel = UILabel(frame: CGRect(x: 10, y: -5, width: headerView.frame.width - 10, height: headerView.frame.height - 10))
+        headerLabel.text = "Sort By: \(self.SortByString)"
+
+        headerLabel.font = UIFont(name: "Poppins-Medium", size: 12)
+        
+        if self.SortByString == "" || self.SortByString == "Remove Filter" {
+            print("Sort Type should not be shown.")
+        } else {
+            headerView.addSubview(headerLabel)
+        }
+        
+//        if section == 0{
+//            if defaultAddressArr.count > 0{
+//                headerView.addSubview(headerLabel)
+//            }
+//        }
+//
+//        if section == 1{
+//            if addressArr.count > 0{
+//                headerView.addSubview(headerLabel)
+//            }
+//        }
+        
+        
+        
+        
+        return headerView
+
     }
     
 }

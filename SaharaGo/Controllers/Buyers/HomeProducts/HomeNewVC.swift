@@ -101,15 +101,7 @@ class HomeNewVC: SuperViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(updateCartBadge(_:)), name: Notification.Name("updateCartBadge"), object: nil)
         
         self.cartBadgeLbl.isHidden = true
-        if let cartCount = UserDefaults.standard.value(forKey: "cartCount") as? Int {
-            if cartCount == 0 {
-                self.cartBadgeLbl.isHidden = true
-            } else {
-                self.cartBadgeLbl.isHidden = false
-                self.cartBadgeLbl.text = "\(cartCount)"
-            }
-            
-        }
+        
         
     }
     
@@ -129,6 +121,18 @@ class HomeNewVC: SuperViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        self.navigationController?.navigationBar.titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Poppins", size: 17) ?? UIFont.systemFont(ofSize: 17)]
+        
+        if let cartCount = UserDefaults.standard.value(forKey: "cartCount") as? Int {
+            if cartCount == 0 {
+                self.cartBadgeLbl.isHidden = true
+            } else {
+                self.cartBadgeLbl.isHidden = false
+                self.cartBadgeLbl.text = "\(cartCount)"
+            }
+            
+        }
         
         self.cartBadgeLbl.layer.cornerRadius = 10
         self.navigationController?.navigationBar.isHidden = false

@@ -21,11 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let gcmMessageIDKey = "gcmMessageIDKey"
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool
     {
-//
-       // UILabel.appearance().substituteFontName = "Poppins"; // USE YOUR FONT NAME INSTEAD
-       // UITextView.appearance().substituteFontName = "Poppins"; // USE YOUR FONT NAME INSTEAD
-       // UITextField.appearance().substituteFontName = "Poppins";
         
+//        UINavigationBar.appearance().titleTextAttributes = [ NSAttributedString.Key.font: UIFont(name: "Poppins", size: 17) ?? UIFont.systemFont(ofSize: 17)]
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         
@@ -331,43 +328,6 @@ extension AppDelegate: UITabBarControllerDelegate {
             UIApplication.shared.delegate!.window!!.rootViewController = viewController
         }
         
-//        if Reachability.isConnectedToNetwork() {
-//            showProgressOnView(appDelegateInstance.window!)
-//
-//            let param:[String:String] = [:]
-//
-//            ServerClass.sharedInstance.putRequestWithUrlParameters(param, path: BASE_URL + PROJECT_URL.VENDOR_LOGOUT, successBlock: { (json) in
-//                print(json)
-//                hideAllProgressOnView(appDelegateInstance.window!)
-//                let success = json["success"].stringValue
-//
-//                if success == "true"
-//                {
-//
-//                    UserDefaults.standard.removeObject(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN)
-//                    UserDefaults.standard.removeObject(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_OTP_ID)
-//
-//                    //self.view.makeToast("Successfully Looged Out.")
-//
-//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                        let userStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-//                        let viewController = userStoryboard.instantiateViewController(withIdentifier: "ChooseCountryVC") as! ChooseCountryVC
-//                        UIApplication.shared.delegate!.window!!.rootViewController = viewController
-//                    }
-//
-//                }
-//                else {
-//                    UIAlertController.showInfoAlertWithTitle("Message", message: json["message"].stringValue, buttonTitle: "Okay")
-//                }
-//            }, errorBlock: { (NSError) in
-//                UIAlertController.showInfoAlertWithTitle("Alert", message: kUnexpectedErrorAlertString, buttonTitle: "Okay")
-//                hideAllProgressOnView(appDelegateInstance.window!)
-//            })
-//
-//        }else{
-//            hideAllProgressOnView(appDelegateInstance.window!)
-//            UIAlertController.showInfoAlertWithTitle("Alert", message: "Please Check internet connection", buttonTitle: "Okay")
-//        }
     }
     
     private func showPopup(_ controller: UIViewController, sourceView: UIView) {
@@ -392,132 +352,3 @@ extension AppDelegate {
     
     
 }
-
-extension UILabel {
-    @objc var substituteFontName : String {
-        get {
-            return self.font.fontName;
-        }
-        set {
-            let fontNameToTest = self.font.fontName.lowercased();
-            var fontName = newValue;
-            if fontNameToTest.range(of: "bold") != nil {
-                fontName += "-Bold";
-            } else if fontNameToTest.range(of: "medium") != nil {
-                fontName += "-Medium";
-            } else if fontNameToTest.range(of: "light") != nil {
-                fontName += "-Light";
-            } else if fontNameToTest.range(of: "ultralight") != nil {
-                fontName += "-UltraLight";
-            }
-            self.font = UIFont(name: fontName, size: self.font.pointSize)
-        }
-    }
-}
-
-extension UITextView {
-    @objc var substituteFontName : String {
-        get {
-            return self.font?.fontName ?? "";
-        }
-        set {
-            let fontNameToTest = self.font?.fontName.lowercased() ?? "";
-            var fontName = newValue;
-            if fontNameToTest.range(of: "bold") != nil {
-                fontName += "-Bold";
-            } else if fontNameToTest.range(of: "medium") != nil {
-                fontName += "-Medium";
-            } else if fontNameToTest.range(of: "light") != nil {
-                fontName += "-Light";
-            } else if fontNameToTest.range(of: "ultralight") != nil {
-                fontName += "-UltraLight";
-            }
-            self.font = UIFont(name: fontName, size: self.font?.pointSize ?? 17)
-        }
-    }
-}
-
-extension UITextField {
-    @objc var substituteFontName : String {
-        get {
-            return self.font?.fontName ?? "";
-        }
-        set {
-            let fontNameToTest = self.font?.fontName.lowercased() ?? "";
-            var fontName = newValue;
-            if fontNameToTest.range(of: "bold") != nil {
-                fontName += "-Bold";
-            } else if fontNameToTest.range(of: "medium") != nil {
-                fontName += "-Medium";
-            } else if fontNameToTest.range(of: "light") != nil {
-                fontName += "-Light";
-            } else if fontNameToTest.range(of: "ultralight") != nil {
-                fontName += "-UltraLight";
-            }
-            self.font = UIFont(name: fontName, size: self.font?.pointSize ?? 17)
-        }
-    }
-}
-//var appFontName       = "Poppins" //Please put your REGULAR font name
-//var appFontBoldName   = "Poppins" //Please put your BOLD font name
-//var appFontItalicName = "Poppins"
-//extension UIFont {
-//
-//
-//@objc class func mySystemFont(ofSize size: CGFloat) -> UIFont {
-//    return UIFont(name: appFontName, size: size)!
-//}
-//
-//@objc class func myBoldSystemFont(ofSize size: CGFloat) -> UIFont {
-//    return UIFont(name: appFontBoldName, size: size)!
-//}
-//
-//@objc class func myItalicSystemFont(ofSize size: CGFloat) -> UIFont {
-//    return UIFont(name: appFontItalicName, size: size)!
-//}
-//
-//@objc convenience init(myCoder aDecoder: NSCoder) {
-//    if let fontDescriptor = aDecoder.decodeObject(forKey: "UIFontDescriptor") as? UIFontDescriptor {
-//        if let fontAttribute = fontDescriptor.fontAttributes[UIFontDescriptor.AttributeName(rawValue: "NSCTFontUIUsageAttribute")] as? String {
-//            var fontName = ""
-//            switch fontAttribute {
-//            case "CTFontRegularUsage":
-//                fontName = appFontName
-//            case "CTFontEmphasizedUsage", "CTFontBoldUsage":
-//                fontName = appFontBoldName
-//            case "CTFontObliqueUsage":
-//                fontName = appFontItalicName
-//            default:
-//                fontName = appFontName
-//            }
-//            self.init(name: fontName, size: fontDescriptor.pointSize)!
-//        }
-//        else {
-//            self.init(myCoder: aDecoder)
-//        }
-//    }
-//    else {
-//        self.init(myCoder: aDecoder)
-//    }
-//}
-//
-//class func overrideInitialize() {
-//    if self == UIFont.self {
-//        let systemFontMethod = class_getClassMethod(self, #selector(systemFont(ofSize:)))
-//        let mySystemFontMethod = class_getClassMethod(self, #selector(mySystemFont(ofSize:)))
-//        method_exchangeImplementations(systemFontMethod!, mySystemFontMethod!)
-//
-//        let boldSystemFontMethod = class_getClassMethod(self, #selector(boldSystemFont(ofSize:)))
-//        let myBoldSystemFontMethod = class_getClassMethod(self, #selector(myBoldSystemFont(ofSize:)))
-//        method_exchangeImplementations(boldSystemFontMethod!, myBoldSystemFontMethod!)
-//
-//        let italicSystemFontMethod = class_getClassMethod(self, #selector(italicSystemFont(ofSize:)))
-//        let myItalicSystemFontMethod = class_getClassMethod(self, #selector(myItalicSystemFont(ofSize:)))
-//        method_exchangeImplementations(italicSystemFontMethod!, myItalicSystemFontMethod!)
-//
-//        let initCoderMethod = class_getInstanceMethod(self, #selector(UIFontDescriptor.init(coder:))) // Trick to get over the lack of UIFont.init(coder:))
-//        let myInitCoderMethod = class_getInstanceMethod(self, #selector(UIFont.init(myCoder:)))
-//        method_exchangeImplementations(initCoderMethod!, myInitCoderMethod!)
-//    }
-//}
-//}

@@ -52,6 +52,9 @@ struct current_order_cartData_struct {
     var isRated :Bool = false
     var metaData :current_order_metaData_struct = current_order_metaData_struct()
     var rating:Double = 0.0
+    var userRating:Double = 0.0
+    var userReview :String = ""
+    
 }
 
 struct current_order_metaData_struct {
