@@ -71,7 +71,8 @@ class CartNewVC: UIViewController {
             if isLogin == "yes" {
                 self.getCartDetailOfUser()
             } else if isSignUp == "yes" {
-                self.saveCartApiCall()
+                self.getDbProducts()
+                //self.saveCartApiCall()
             } else {
                 self.getCartDetailOfUser()
             }
@@ -130,9 +131,16 @@ class CartNewVC: UIViewController {
                 setPriceLbl(dbProducts)
                 self.tableView.isHidden = false
                 self.emptyView.isHidden = true
+                if isSignUp == "yes" {
+                    self.saveCartApiCall()
+                }
             } else {
                 self.tableView.isHidden = true
                 self.emptyView.isHidden = false
+                if isSignUp == "yes" {
+                    self.saveCartApiCall()
+                }
+                
             }
             
             DispatchQueue.main.async {
