@@ -55,15 +55,15 @@ class ServerClass: NSObject {
     
     func getRequestWithUrlParameters(_ sendJson:[String:Any], path:String, successBlock:@escaping (_ response: JSON )->Void , errorBlock: @escaping (_ error: NSError) -> Void ){
         var headerField : [String : String] = [:]
-        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) != nil  {
-            headerField = ["Content-Type":"application/json", "XAPIKEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) as! String]
+        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.LOGIN_TOKEN) != nil  {
+            headerField = ["Content-Type":"application/json", "X-API-KEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.LOGIN_TOKEN) as! String]
         }
         else {
-            headerField = ["Content-Type":"application/json","XAPIKEY":X_API_KEY]
+            headerField = ["Content-Type":"application/json","X-API-KEY":X_API_KEY]
         }
         ServerClass.Manager.request(path, method: .get, encoding: JSONEncoding.default, headers: headerField).responseJSON { (response) in
             if response.response?.statusCode == 401 {
-               self.logOutUser()
+               //self.logOutUser()
             }
             switch response.result {
             case .success:
@@ -79,16 +79,16 @@ class ServerClass: NSObject {
     
     func postRequestWithUrlParameters(_ sendJson:[String:Any], path:String, successBlock:@escaping (_ response: JSON )->Void , errorBlock: @escaping (_ error: NSError) -> Void ){
         var headerField : [String : String] = [:]
-        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) != nil  {
-            headerField = ["Content-Type":"application/json", "XAPIKEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) as! String]
-            
+        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.LOGIN_TOKEN) != nil  {
+            headerField = ["Content-Type":"application/json", "X-API-KEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.LOGIN_TOKEN) as! String]
         }
         else {
-            headerField = ["Content-Type":"application/json","XAPIKEY":X_API_KEY]
+//            headerField = ["Content-Type":"application/json","X-API-KEY":X_API_KEY]
+            headerField = ["Content-Type":"application/json", "X-API-KEY":X_API_KEY]
         }
         ServerClass.Manager.request(path, method: .post, parameters: sendJson, encoding: JSONEncoding.default, headers: headerField).responseJSON { (response) in
             if response.response?.statusCode == 401 {
-               self.logOutUser()
+               //self.logOutUser()
             }
             switch response.result {
             case .success:
@@ -104,17 +104,17 @@ class ServerClass: NSObject {
     
     func putRequestWithUrlParameters(_ sendJson:[String:Any], path:String, successBlock:@escaping (_ response: JSON )->Void , errorBlock: @escaping (_ error: NSError) -> Void ){
         var headerField : [String : String] = [:]
-        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) != nil  {
-            headerField = ["Content-Type":"application/json", "XAPIKEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) as! String]
+        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.LOGIN_TOKEN) != nil  {
+            headerField = ["Content-Type":"application/json", "X-API-KEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) as! String]
             
         }
         else {
-            headerField = ["Content-Type":"application/json","XAPIKEY":X_API_KEY]
+            headerField = ["Content-Type":"application/json","X-API-KEY":X_API_KEY]
         }
         ServerClass.Manager.request(path, method: .put, parameters: sendJson, encoding: JSONEncoding.default, headers: headerField).responseJSON
             { (response) in
                 if response.response?.statusCode == 401 {
-                    self.logOutUser()
+                    //self.logOutUser()
                 }
                 switch response.result {
                 case .success:
@@ -129,11 +129,11 @@ class ServerClass: NSObject {
     
     func deleteRequestWithUrlParameters(_ sendJson:[String:Any], path:String, successBlock:@escaping (_ response: JSON )->Void , errorBlock: @escaping (_ error: NSError) -> Void ){
         var headerField : [String : String] = [:]
-        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) != nil  {
-            headerField = ["Content-Type":"application/json", "XAPIKEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) as! String]
+        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.LOGIN_TOKEN) != nil  {
+            headerField = ["Content-Type":"application/json", "X-API-KEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) as! String]
         }
         else {
-            headerField = ["Content-Type":"application/json","XAPIKEY":X_API_KEY]
+            headerField = ["Content-Type":"application/json","X-API-KEY":X_API_KEY]
         }
         ServerClass.Manager.request(path, method: .delete, parameters: sendJson, encoding: JSONEncoding.default, headers: headerField).responseJSON { (response) in
             switch response.result {
@@ -148,7 +148,7 @@ class ServerClass: NSObject {
     }
     
     func sendMultipartRequestToServer(apiUrlStr:String, imageKeyName:String, imageUrl:URL?, successBlock:@escaping (_ response: JSON)->Void , errorBlock: @escaping (_ error: NSError) -> Void ){
-        let headerField = ["XAPIKEY":X_API_KEY]
+        let headerField = ["X-API-KEY":X_API_KEY]
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imageUrl! , withName: imageKeyName)
         },to:apiUrlStr, method: .post, headers : headerField,
@@ -167,7 +167,7 @@ class ServerClass: NSObject {
     }
     
     func sendImageMultipartRequestToServerWithToken(apiUrlStr:String, imageKeyName:String, imageUrl:URL?, successBlock:@escaping (_ response: JSON)->Void , errorBlock: @escaping (_ error: NSError) -> Void ){
-        let headerField = ["XAPIKEY":X_API_KEY,"APPTOKEN":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.LOGIN_TOKEN) as! String]
+        let headerField = ["X-API-KEY":X_API_KEY,"APPTOKEN":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.LOGIN_TOKEN) as! String]
         Alamofire.upload(multipartFormData: { multipartFormData in
             multipartFormData.append(imageUrl! , withName: imageKeyName)
         },to:apiUrlStr, method: .post, headers : headerField,
@@ -187,11 +187,11 @@ class ServerClass: NSObject {
     
     func sendMultipartRequestToServerPP(apiUrlStr:String, imageKeyName:String, imageUrl:URL?, successBlock:@escaping (_ response: JSON)->Void , errorBlock: @escaping (_ error: NSError) -> Void ){
         var headerField : [String : String] = [:]
-        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) != nil  {
-            headerField = ["Content-Type":"application/json", "XAPIKEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) as! String]
+        if UserDefaults.standard.object(forKey: USER_DEFAULTS_KEYS.LOGIN_TOKEN) != nil  {
+            headerField = ["Content-Type":"application/json", "X-API-KEY":X_API_KEY, "token":UserDefaults.standard.value(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN) as! String]
         }
         else {
-           // headerField = ["Content-Type":"application/json","XAPIKEY":X_API_KEY]
+           // headerField = ["Content-Type":"application/json","X-API-KEY":X_API_KEY]
             headerField = ["X-API-KEY":X_API_KEY]
         }
         Alamofire.upload(multipartFormData: { multipartFormData in
@@ -217,10 +217,10 @@ class ServerClass: NSObject {
         }
         var headerField = [String : String]()
         if UserDefaults.standard.bool(forKey: USER_DEFAULTS_KEYS.IS_LOGIN) == true {
-            headerField = ["content-type": "application/json","XAPIKEY": X_API_KEY, "APPTOKEN": appLoginToken ?? " "]
+            headerField = ["content-type": "application/json","X-API-KEY": X_API_KEY, "APPTOKEN": appLoginToken ?? " "]
         }
         else {
-            headerField  = ["content-type": "application/json","XAPIKEY": X_API_KEY]
+            headerField  = ["content-type": "application/json","X-API-KEY": X_API_KEY]
         }
         Alamofire.upload(multipartFormData: { multipartFormData in
             for (key,value) in sendJson
@@ -251,10 +251,10 @@ class ServerClass: NSObject {
     func sendMultipartRequestToServerWithMultipleImages(urlString:String, imageKeyName:String, imageUrl:[URL?], successBlock:@escaping ( _ response: JSON)->Void , errorBlock: @escaping ( _ error: NSError) -> Void ){
            var headerField : [String : String] = [:]
            if UserDefaults.standard.bool(forKey: USER_DEFAULTS_KEYS.IS_LOGIN) == true {
-               headerField = ["content-type": "application/json","XAPIKEY": X_API_KEY, "APPTOKEN": appLoginToken ?? " "]
+               headerField = ["content-type": "application/json","X-API-KEY": X_API_KEY, "APPTOKEN": appLoginToken ?? " "]
            }
            else {
-               headerField = ["content-type": "application/json","XAPIKEY": X_API_KEY]
+               headerField = ["content-type": "application/json","X-API-KEY": X_API_KEY]
            }
            Alamofire.upload(multipartFormData: { multipartFormData in
                
@@ -281,10 +281,10 @@ class ServerClass: NSObject {
 //    {
 //        var headerField : [String : String] = [:]
 //        if UserDefaults.standard.bool(forKey: USER_DEFAULTS_KEYS.IS_LOGIN) == true {
-//            headerField = ["content-type": "application/json","XAPIKEY": X_API_KEY, "APPTOKEN": appLoginToken ?? " "]
+//            headerField = ["content-type": "application/json","X-API-KEY": X_API_KEY, "APPTOKEN": appLoginToken ?? " "]
 //        }
 //        else {
-//            headerField = ["content-type": "application/json","XAPIKEY": X_API_KEY]
+//            headerField = ["content-type": "application/json","X-API-KEY": X_API_KEY]
 //        }
 //        
 //        Alamofire.upload(multipartFormData: { multipartFormData in
@@ -326,19 +326,19 @@ class ServerClass: NSObject {
     
 
     
-    func logOutUser()
-    {
-        UserDefaults.standard.removeObject(forKey: "token")
-        UserDefaults.standard.removeObject(forKey: "type")
-        UserDefaults.standard.removeObject(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN)
-        UserDefaults.standard.removeObject(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_OTP_ID)
-        UserDefaults.standard.removeObject(forKey: USER_DEFAULTS_KEYS.CART_ID)
-        isLogin = "no"
-        isSignUp = "no"
-        let userStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = userStoryboard.instantiateViewController(withIdentifier: "ChooseCountryVC") as! ChooseCountryVC
-        UIApplication.shared.delegate!.window!!.rootViewController = viewController
-    }
+//    func logOutUser()
+//    {
+//        UserDefaults.standard.removeObject(forKey: "token")
+//        UserDefaults.standard.removeObject(forKey: "type")
+//        UserDefaults.standard.removeObject(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_TOKEN)
+//        UserDefaults.standard.removeObject(forKey: USER_DEFAULTS_KEYS.VENDOR_SIGNUP_OTP_ID)
+//        UserDefaults.standard.removeObject(forKey: USER_DEFAULTS_KEYS.CART_ID)
+//        isLogin = "no"
+//        isSignUp = "no"
+//        let userStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let viewController = userStoryboard.instantiateViewController(withIdentifier: "ChooseCountryVC") as! ChooseCountryVC
+//        UIApplication.shared.delegate!.window!!.rootViewController = viewController
+//    }
     
     
 }
